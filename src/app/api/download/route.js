@@ -1,9 +1,11 @@
+export const runtime = 'nodejs'
+
 import ytdl from '@distube/ytdl-core'
 import {createWriteStream} from 'fs'
 import { join } from 'path';
 import { NextResponse } from 'next/server';
 
-export const runtime = 'nodejs'
+
 
 export const GET = (req) => {
   const videoId = new URL(req.url).searchParams.get('videoId')
