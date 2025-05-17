@@ -11,6 +11,24 @@ const nextConfig = {
     ],
   },
 
+  async headers() {
+    return [
+      {
+        source: '/(.*)', // Match all routes
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'ALLOWALL', // Allows iframe embedding
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors *", // Allow any domain to embed
+          },
+        ],
+      },
+    ];
+  },
+
   // webpack: (config, { dev }) => {
   //   if (dev) {
   //     config.watchOptions = {
