@@ -5,8 +5,9 @@ import { useEffect, useState } from "react"
 import Image from 'next/image'
 import Link from "next/link"
 import { IoMdDownload, IoMdThumbsUp } from "react-icons/io"
+import LazyLoad from "vanilla-lazyload"
 
-
+let lazyLoadInstance
 export default function () {
   const params = useSearchParams()
 
@@ -32,6 +33,7 @@ export default function () {
 
   useEffect(() => {
     getVideoDetails()
+    lazyLoadInstance = new LazyLoad()
   }, [])
 
   return (
@@ -42,7 +44,7 @@ export default function () {
           allowFullScreen
           width={500}
           height={500}
-          className="rounded-2xl w-full "
+          className="rounded-2xl w-full lazy"
         />
         {loading
           ? null
