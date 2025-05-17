@@ -31,7 +31,7 @@ export default function () {
   }
 
   useEffect(() => {
-    // getVideoDetails()
+    getVideoDetails()
   }, [])
 
   return (
@@ -48,14 +48,12 @@ export default function () {
           ? null
           : error
             ? null // some loader component
-            : videoDetails
-              ?
-              <div className="flex rounded-3xl flex-col px-5 pt-2">
+            : <div className="flex rounded-3xl flex-col px-5 pt-2">
                 <div className="flex flex-col gap-0 ">
-                  <div className="text-white font-bold text-lg">{videoDetails.title}</div>
+                  <div className="text-white font-bold text-lg">{videoDetails?.title || ''}</div>
                   <div className="flex flex-row gap-3 text-gray-400">
-                    <div>{videoDetails.viewCount}</div>
-                    <div>{videoDetails.publishedAt}</div>
+                    <div>{videoDetails?.viewCount || ''}</div>
+                    <div>{videoDetails?.publishedAt || ''}</div>
                   </div>
                 </div>
                 <div className="flex flex-row p-2 gap-3 items-center">
@@ -63,11 +61,11 @@ export default function () {
                     className="rounded-full border border-gray-800 size-9"
                     width={100}
                     height={100}
-                    src={videoDetails.channelThumbnail}
+                    src={videoDetails?.channelThumbnail || ''}
                     alt=""
                   />
-                  <div className="text-white text-lg font-bold">{videoDetails.channelName}</div>
-                  <div className="text-gray-400 ">{videoDetails.subscriberCount}</div>
+                  <div className="text-white text-lg font-bold">{videoDetails?.channelName || ''}</div>
+                  <div className="text-gray-400 ">{videoDetails?.subscriberCount || ''}</div>
                 </div>
 
                 <div className="flex gap-3 ">
@@ -76,7 +74,7 @@ export default function () {
                       color="white"
                       className="size-5"
                     />
-                    <div className="text-white font-semibold">{videoDetails.viewCount}</div>
+                    <div className="text-white font-semibold">{videoDetails?.viewCount || ''}</div>
                   </div>
                   <Link href={'/api/download'} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
                     <IoMdDownload
@@ -91,13 +89,13 @@ export default function () {
                   {videoDetails.description}
                 </div> */}
               </div>
-              : null
+            
         }
       </div>
 
       <div className="w-1/4 text-gray-400 flex p-5 border border-gray-800 bg-black rounded-[40px] m-2 flex-col gap-4">
         <div className="text-white text-lg pl-3">Description</div>
-        <div>{videoDetails ? videoDetails.description : null}</div>
+        <div>{videoDetails ? videoDetails?.description : null}</div>
       </div>
     </div>
   )

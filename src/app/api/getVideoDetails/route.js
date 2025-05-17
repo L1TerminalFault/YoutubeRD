@@ -13,41 +13,47 @@ export const GET = async (req) => {
   }
 
 
-  console.log(
-    root
-      // .contents.twoColumnWatchNextResults
-      // .results
-      // .results
+//   console.log(
+//     root
+//       .contents.twoColumnWatchNextResults
+//       .results
+//       .results
       
-      // .contents
-      // [1].videoSecondaryInfoRenderer.owner
-      // .videoOwnerRenderer.subscriberCountText.simpleText
-      // .itemSectionRenderer
-      // .results.contents[0].videoPrimaryInfoRenderer
+//       .contents[0].itemSectionRenderer.contents[0].backgroundPromoRenderer
+//       // .videoSecondaryInfoRenderer.owner
+//       // .videoOwnerRenderer.subscriberCountText.simpleText
+//       // .itemSectionRenderer
+//       // .results.contents[0].videoPrimaryInfoRenderer
 
-  )
-    // Renderer.primaryContents.sectionListRenderer
-    // .contents[1].continuationItemRenderer.continuationEndpoint.continuationCommand.token //get the continuation key here
+//   )
+//     // Renderer.primaryContents.sectionListRenderer
+//     // .contents[1].continuationItemRenderer.continuationEndpoint.continuationCommand.token //get the continuation key here
 
 
-    const meta = root
-      .contents.twoColumnWatchNextResults
-      .results.results.contents[1]?.videoSecondaryInfoRenderer.owner.videoOwnerRenderer
-    const channel = root
-      .contents.twoColumnWatchNextResults
-      .results.results.contents[1]?.videoSecondaryInfoRenderer
- const data = root
-      .contents.twoColumnWatchNextResults.results.results.contents[0].videoPrimaryInfoRenderer
+//     const meta = root
+//       .contents.twoColumnWatchNextResults
+//       .results.results.contents[1]?.videoSecondaryInfoRenderer.owner.videoOwnerRenderer
+//     const channel = root
+//       .contents.twoColumnWatchNextResults
+//       .results.results.contents[1]?.videoSecondaryInfoRenderer
+//  const data = root
+//       .contents.twoColumnWatchNextResults.results.results.contents[0].videoPrimaryInfoRenderer
+//       const title = root
+//       .contents.twoColumnWatchNextResults
+//       .results
+//       .results
+      
+//       .contents[0].itemSectionRenderer.contents[0].backgroundPromoRenderer
 
-    const response = {
-    title: data.title.runs[0].text,
-    publishedAt: data.relativeDateText.simpleText,
-    channelThumbnail: meta.thumbnail.thumbnails[2].url,
-    channelName: meta.title.runs[0].text,
-    subscriberCount: meta ? meta.subscriberCountText.simpleText : '',
-    description: channel.attributedDescription.content,
-    viewCount: data.viewCount.videoViewCountRenderer.viewCount.simpleText
-  }
+//     const response = {
+//     title: title.title.runs[0].text,
+//     publishedAt: data.relativeDateText.simpleText,
+//     channelThumbnail: meta ? meta.thumbnail.thumbnails[2].url : "",
+//     channelName: meta ? meta.title.runs[0].text : '',
+//     subscriberCount: meta ? meta.subscriberCountText.simpleText : '',
+//     description: channel.attributedDescription.content,
+//     viewCount: data.viewCount.videoViewCountRenderer.viewCount.simpleText
+//   }
 
 
 
@@ -55,5 +61,5 @@ export const GET = async (req) => {
   // .itemSectionRenderer.contents[0]
   // .shelfRenderer.content.expandedShelfContentsRenderer.items[0]
   // .videoRenderer.channelThumbnailSupportedRenderers)
-  return Response.json(response);
+  return Response.json(null);
 };
