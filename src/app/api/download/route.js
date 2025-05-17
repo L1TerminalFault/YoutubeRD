@@ -15,7 +15,7 @@ export const GET = (req) => {
 // console.log(stream)
 // stream.pipe(createWriteStream(join(process.cwd(), 'video.mp4')))
 // return Response.json(stream)
-  return new NextResponse(stream, {
+  return new Response(stream, {
     status: 200,
     headers: {
       'Content-Type': 'video/mp4', // Adjust content type as needed
