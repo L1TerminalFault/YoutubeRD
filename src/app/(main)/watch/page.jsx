@@ -31,7 +31,7 @@ export default function () {
   }
 
   useEffect(() => {
-    getVideoDetails()
+    // getVideoDetails()
   }, [])
 
   return (
