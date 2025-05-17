@@ -76,7 +76,7 @@ export default function () {
                     />
                     <div className="text-white font-semibold">{videoDetails?.viewCount || ''}</div>
                   </div>
-                  <Link href={'/api/download'} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
+                  <Link href={`/api/download?videoId=${videoId}`} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
                     <IoMdDownload
                       color="black"
                       className="size-5"
