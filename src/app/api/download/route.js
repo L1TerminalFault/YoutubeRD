@@ -12,9 +12,9 @@ export const GET = (req) => {
   const stream = ytdl(`http://www.youtube.com/watch?v=${videoId}`)
 
   
-// console.log(stream)
-// stream.pipe(createWriteStream(join(process.cwd(), 'video.mp4')))
-// return Response.json(stream)
+console.log(stream)
+stream.pipe(createWriteStream(join(process.cwd(), 'video.mp4')))
+return Response.json(stream)
   return new NextResponse(stream, {
     status: 200,
     headers: {
