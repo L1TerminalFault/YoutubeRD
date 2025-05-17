@@ -38,6 +38,7 @@ export default function () {
     const res = await fetch(`/api/download?videoId=${videoId}`);
     const data = await res.json();
 
+    console.log('downloading')
     const a = document.createElement('a');
     a.href = data.url;
     a.download = 'video.mp4';
@@ -89,7 +90,7 @@ export default function () {
                   />
                   <div className="text-white font-semibold">{videoDetails?.viewCount || ''}</div>
                 </div>
-                <div onClick={() => download(videoDetails.videoId)} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
+                <div onClick={() => download(videoId)} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
                   <IoMdDownload
                     color="black"
                     className="size-5"
