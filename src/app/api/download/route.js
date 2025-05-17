@@ -9,7 +9,10 @@ import { NextResponse } from 'next/server';
 
 export const GET = (req) => {
   const videoId = new URL(req.url).searchParams.get('videoId')
-  const stream = ytdl(`http://www.youtube.com/watch?v=${videoId}`)
+  const stream = ytdl(`http://www.youtube.com/watch?v=${videoId}`, {
+    filter: 'videoandaudio',
+    quality: 'highest'
+  })
 
   
 // console.log(stream)
