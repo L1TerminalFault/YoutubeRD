@@ -34,6 +34,19 @@ export default function () {
     getVideoDetails()
   }, [])
 
+  async function download(videoId) {
+    const res = await fetch(`/api/get-download-url?videoId=${videoId}`);
+    const data = await res.json();
+
+    const a = document.createElement('a');
+    a.href = data.url;
+    a.download = 'video.mp4';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+
   return (
     <div className="flex md:flex-row flex-col gap-3 w-full p-3 rounded-2xl overflow-hidden">
       <div className="flex flex-col p-3 gap-3 w-full">
@@ -49,47 +62,47 @@ export default function () {
           : error
             ? null // some loader component
             : <div className="flex rounded-3xl flex-col px-5 pt-2">
-                <div className="flex flex-col gap-0 ">
-                  <div className="text-white font-bold text-lg">{videoDetails?.title || ''}</div>
-                  <div className="flex flex-row gap-3 text-gray-400">
-                    <div>{videoDetails?.viewCount || ''}</div>
-                    <div>{videoDetails?.publishedAt || ''}</div>
-                  </div>
+              <div className="flex flex-col gap-0 ">
+                <div className="text-white font-bold text-lg">{videoDetails?.title || ''}</div>
+                <div className="flex flex-row gap-3 text-gray-400">
+                  <div>{videoDetails?.viewCount || ''}</div>
+                  <div>{videoDetails?.publishedAt || ''}</div>
                 </div>
-                <div className="flex flex-row p-2 gap-3 items-center">
-                  <Image
-                    className="rounded-full border border-gray-800 size-9"
-                    width={100}
-                    height={100}
-                    src={videoDetails?.channelThumbnail || ''}
-                    alt=""
+              </div>
+              <div className="flex flex-row p-2 gap-3 items-center">
+                <Image
+                  className="rounded-full border border-gray-800 size-9"
+                  width={100}
+                  height={100}
+                  src={videoDetails?.channelThumbnail || ''}
+                  alt=""
+                />
+                <div className="text-white text-lg font-bold">{videoDetails?.channelName || ''}</div>
+                <div className="text-gray-400 ">{videoDetails?.subscriberCount || ''}</div>
+              </div>
+
+              <div className="flex gap-3 ">
+                <div className="p-1 px-4 rounded-full flex gap-2 bg-gray-900">
+                  <IoMdThumbsUp
+                    color="white"
+                    className="size-5"
                   />
-                  <div className="text-white text-lg font-bold">{videoDetails?.channelName || ''}</div>
-                  <div className="text-gray-400 ">{videoDetails?.subscriberCount || ''}</div>
+                  <div className="text-white font-semibold">{videoDetails?.viewCount || ''}</div>
                 </div>
-
-                <div className="flex gap-3 ">
-                  <div className="p-1 px-4 rounded-full flex gap-2 bg-gray-900">
-                    <IoMdThumbsUp
-                      color="white"
-                      className="size-5"
-                    />
-                    <div className="text-white font-semibold">{videoDetails?.viewCount || ''}</div>
-                  </div>
-                  <Link href={`/api/download?videoId=${videoId}`} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
-                    <IoMdDownload
-                      color="black"
-                      className="size-5"
-                    />
-                    <div className="text-black font-bold ">Download</div>
-                  </Link>
+                <div onClick={() => download(videoDetails.videoId)} className='p-1 px-5 rounded-full flex gap-2 bg-white'>
+                  <IoMdDownload
+                    color="black"
+                    className="size-5"
+                  />
+                  <div className="text-black font-bold ">Download</div>
                 </div>
+              </div>
 
-                {/* <div className="text-white">
+              {/* <div className="text-white">
                   {videoDetails.description}
                 </div> */}
-              </div>
-            
+            </div>
+
         }
       </div>
 

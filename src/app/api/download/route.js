@@ -29,41 +29,21 @@
 // }
 
 
-  import { NextResponse } from 'next/server';
-  import { exec } from 'child_process';
-  import { tmpdir } from 'os';
-  import { join } from 'path';
-  import { createWriteStream } from 'fs';
+// app/api/get-download-url/route.js
+export const runtime = 'nodejs';
 
-  export const runtime = 'nodejs';
+import ytdl from '@distube/ytdl-core';
 
-  export async function GET(req) {
-    const url = new URL(req.url);
-    const videoId = url.searchParams.get('videoId');
+export async function GET(req) {
+  const videoId = new URL(req.url).searchParams.get('videoId');
+  if (!videoId) return new Response('Missing videoId', { status: 400 });
 
-    if (!videoId) {
-      return new Response('Missing videoId', { status: 400 });
-    }
+  try {
+    const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${videoId}`);
+    const format = ytdl.chooseFormat(info.formats, { quality: 'highestvideo' });
 
-    const outputPath = join(tmpdir(), `${videoId}.mp4`);
-    const command = `yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o "${outputPath}" https://www.youtube.com/watch?v=${videoId}`;
-
-    return new Promise((resolve, reject) => {
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          reject(new Response(`Error: ${stderr || error.message}`, { status: 500 }));
-        } else {
-          const stream = createReadStream(outputPath);
-          resolve(
-            new Response(stream, {
-              status: 200,
-              headers: {
-                'Content-Type': 'video/mp4',
-                'Content-Disposition': `attachment; filename="${videoId}.mp4"`,
-              },
-            })
-          );
-        }
-      });
-    });
+    return Response.json({ url: format.url }); // direct YouTube URL
+  } catch (e) {
+    return new Response('Error getting video', { status: 500 });
   }
+}
