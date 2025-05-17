@@ -35,7 +35,7 @@ export default function () {
   }, [])
 
   async function download(videoId) {
-    const res = await fetch(`/api/get-download-url?videoId=${videoId}`);
+    const res = await fetch(`/api/download?videoId=${videoId}`);
     const data = await res.json();
 
     const a = document.createElement('a');
