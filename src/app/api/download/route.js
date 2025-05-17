@@ -3,6 +3,8 @@ import {createWriteStream} from 'fs'
 import { join } from 'path';
 import { NextResponse } from 'next/server';
 
+export const runtime = 'nodejs'
+
 export const GET = (req) => {
   const videoId = new URL(req.url).searchParams.get('videoId')
   const stream = ytdl(`http://www.youtube.com/watch?v=${videoId}`)
