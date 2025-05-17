@@ -12,14 +12,14 @@ export const GET = (req) => {
   const stream = ytdl(`http://www.youtube.com/watch?v=${videoId}`)
 
   
-console.log(stream)
-stream.pipe(createWriteStream(join(process.cwd(), 'video.mp4')))
+// console.log(stream)
+// stream.pipe(createWriteStream(join(process.cwd(), 'video.mp4')))
 // return Response.json(stream)
   return new NextResponse(stream, {
     status: 200,
     headers: {
-      'Content-Type': 'audio/mpeg', // Adjust content type as needed
-      'Content-Disposition': `attachment; filename="video.mp4"`,
+      'Content-Type': 'video/mp4', // Adjust content type as needed
+      'Content-Disposition': `attachment; filename="video"`,
     },
   });
 
